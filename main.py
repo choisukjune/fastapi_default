@@ -1,21 +1,24 @@
+import uvicorn
+from fastapi import FastAPI
 import time
 import datetime # datetime 라이브러리 import
+from pathlib import Path
 import json
 import subprocess
-import uvicorn
-
-from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from multiprocessing import Process, Queue
-
 
 app = FastAPI()
 
 app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name="forder1")
 templates = Jinja2Templates(directory="templates/forder1")
+
+
+app = FastAPI()
+
+from multiprocessing import Process, Queue
 
 def work(id, start, end, result):
     total = 0
@@ -72,12 +75,12 @@ async def startup_event() :
 #async def root():
 async def read_item(request: Request):
     r = dict( request )
-    print(r)
-    for a in r:
-        print( "------------------------------------------" )
-        print( r )
-        print( r[ a ] )
-    test_process()
+    # print(r)
+    # for a in r:
+    #     print( "------------------------------------------" )
+    #     print( r )
+    #     print( r[ a ] )
+    # test_process()
     return templates.TemplateResponse("index.html", {"request": r, "time": checkTime()})
     #return {"message": "Hello World", "time" : checkTime()}
 
@@ -88,4 +91,5 @@ async def say_hello(name: str):
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=80
 if __name__ == "__main__":
-    uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=False )
+    uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=True, log_config="log.ini", reload_excludes="api.log" )
+    #uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=True )
