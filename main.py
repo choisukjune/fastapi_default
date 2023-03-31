@@ -1,24 +1,21 @@
-import uvicorn
-from fastapi import FastAPI
 import time
 import datetime # datetime 라이브러리 import
-from pathlib import Path
 import json
 import subprocess
+import uvicorn
+
+from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from multiprocessing import Process, Queue
+
 
 app = FastAPI()
 
 app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name="forder1")
 templates = Jinja2Templates(directory="templates/forder1")
-
-
-app = FastAPI()
-
-from multiprocessing import Process, Queue
 
 def work(id, start, end, result):
     total = 0
