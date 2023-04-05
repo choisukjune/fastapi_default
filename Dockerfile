@@ -26,9 +26,8 @@ RUN echo 'alias pip=pip3' >> .bashrc
 
 WORKDIR /
 RUN mkdir workspace
-RUN cd workspace
-RUN mkdir fastapi_default
-RUN cd fastapi_default
 RUN git clone https://github.com/choisukjune/fastapi_default.git /workspace/fastapi_default
-RUN pip install -r reauirements.txt
+
+WORKDIR /workspace/fastapi_default
+RUN pip install -r requirements.txt
 CMD [ "python", "main.py" ]
