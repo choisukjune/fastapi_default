@@ -9,6 +9,9 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import pandas_datareader as pdr
+import pandas as pd
+from json import loads, dumps
 
 app = FastAPI()
 
@@ -70,7 +73,12 @@ async def startup_event() :
     #https://hbase.tistory.com/341 subprocess 정보
     with subprocess.Popen(["ls", "-al"], stdout=subprocess.PIPE) as proc:
         print(proc.stdout.read().decode("utf-8"))   
-    
+
+from fastapi import Response
+import json
+
+      
+#https://wendys.tistory.com/174
 @app.get("/")
 #async def root():
 async def read_item(request: Request):
@@ -81,15 +89,28 @@ async def read_item(request: Request):
     #     print( r )
     #     print( r[ a ] )
     # test_process()
-    return templates.TemplateResponse("index.html", {"request": r, "time": checkTime()})
+    #a = pdr.get_data_fred('GS10')
+    a = pdr.DataReader('105840', 'naver', start="20230301", end="20230401")
+    b = a.to_dict()
+    print( b )
+    
+    #result = a.to_json(orient="split")
+    #parsed = loads(result)
+    #b = dumps(parsed, indent=4)  
+    #print(b)
+    #json_str = json.dumps(a, indent=4, default=str)
+    #return Response(content=json_str, media_type='application/json')  
+    df = pd.DataFrame(a)
+    return templates.TemplateResponse("index.html", {"request": r, "time": df.to_html(classes='ui compact table celled')})
     #return {"message": "Hello World", "time" : checkTime()}
 
-
+#https://psystat.tistory.com/151
+#pandas_datareader
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=80
 if __name__ == "__main__":
-    uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=True, log_config="log.ini", reload_excludes="api.log" )
+    uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=True, log_config="log.yaml", reload_excludes="api.log" )
     #uvicorn.run('main:app', host="0.0.0.0", port=80, reload=True, access_log=True )
