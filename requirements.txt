@@ -3,4 +3,3 @@ uvicorn
 jinja2
 pandas
 pandas_datareader
-yaml
