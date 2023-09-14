@@ -1,0 +1,5 @@
+namespace: backend
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

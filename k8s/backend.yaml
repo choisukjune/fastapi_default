@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          # 이미지를 넣어주세요.
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_5e5ca5760e6c
+          # env:
+          #   - name: TZ
+          #     value: Asia/Seoul
+          #   - name: DATABASE_URL
+          #     value: jdbc:mariadb://mariadb:3306/krampoline
+          resources:
+            requests:
+              memory: 1Gi
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/test
+          #     port: 8080
