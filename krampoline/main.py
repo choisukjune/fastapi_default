@@ -19,7 +19,10 @@ app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name
 templates = Jinja2Templates(directory="templates/forder1")
 
 
-app = FastAPI()
+app = FastAPI(
+    docs_url=None, # Disable docs (Swagger UI)
+    redoc_url=None, # Disable redoc
+)
 
 from multiprocessing import Process, Queue
 
