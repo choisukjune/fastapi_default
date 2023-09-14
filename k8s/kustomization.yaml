@@ -1,4 +1,4 @@
-namespace: backend
+namespace: krampoline
 resources:
   - deployment.yaml
   - service.yaml
