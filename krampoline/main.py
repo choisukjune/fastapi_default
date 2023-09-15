@@ -5,13 +5,15 @@ import datetime # datetime 라이브러리 import
 from pathlib import Path
 import json
 import subprocess
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pandas_datareader as pdr
 import pandas as pd
 from json import loads, dumps
+
+prefix_router = APIRouter(prefix="/k4facd99def2ba")
 
 app = FastAPI(
     docs_url=None, # Disable docs (Swagger UI)
@@ -68,7 +70,7 @@ def checkTime():
     return times
 
 
-@app.on_event("startup")
+@prefix_router.on_event("startup")
 async def startup_event() :
     '''on_event로 지정하면 request 올 때마다 해당 함수를 실행시킬 수 있다'''
     #https://hbase.tistory.com/341 subprocess 정보
@@ -80,18 +82,21 @@ import json
 
       
 #https://wendys.tistory.com/174
-@app.get("/")
+@prefix_router.get("/")
 #async def root():
 async def read_item(request: Request):
     r = dict( request )
-    return templates.TemplateResponse("index.html", {"request": r, "time": "home"})
+    return templates.TemplateResponse("index.html", {"request": r, "time": checkTime()})
     #return {"message": "Hello World", "time" : checkTime()}
 
 #https://psystat.tistory.com/151
 #pandas_datareader
-@app.get("/hello/{name}")
+@prefix_router.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
+
+# Now add the router to the app
+app.include_router(prefix_router)  
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=3000
 if __name__ == "__main__":
