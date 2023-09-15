@@ -84,7 +84,6 @@ import json
 #async def root():
 async def read_item(request: Request):
     r = dict( request )
-    df = pd.DataFrame(a)
     return templates.TemplateResponse("index.html", {"request": r, "time": "home"})
     #return {"message": "Hello World", "time" : checkTime()}
 
