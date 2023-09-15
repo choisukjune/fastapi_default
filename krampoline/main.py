@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 import time
 import datetime # datetime 라이브러리 import
 from pathlib import Path
@@ -13,17 +13,10 @@ import pandas_datareader as pdr
 import pandas as pd
 from json import loads, dumps
 
-prefix_router = APIRouter(prefix="/k4facd99def2ba")
-
-
-
 app = FastAPI(
     docs_url=None, # Disable docs (Swagger UI)
     redoc_url=None, # Disable redoc
 )
-
-
-
 
 app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name="forder1")
 templates = Jinja2Templates(directory="templates/forder1")
@@ -85,11 +78,9 @@ async def startup_event() :
 from fastapi import Response
 import json
 
-
-
-
+      
 #https://wendys.tistory.com/174
-@prefix_router.get("/")
+@app.get("/")
 #async def root():
 async def read_item(request: Request):
     r = dict( request )
@@ -116,12 +107,9 @@ async def read_item(request: Request):
 
 #https://psystat.tistory.com/151
 #pandas_datareader
-@prefix_router.get("/hello/{name}")
+@app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
-
-# Now add the router to the app
-app.include_router(prefix_router)
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=3000
 if __name__ == "__main__":
