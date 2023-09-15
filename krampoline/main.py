@@ -5,24 +5,28 @@ import datetime # datetime 라이브러리 import
 from pathlib import Path
 import json
 import subprocess
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pandas_datareader as pdr
 import pandas as pd
-from json import loads, dumps
+from sys import prefix
+import os
 
-app = FastAPI()
-
-app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name="forder1")
-templates = Jinja2Templates(directory="templates/forder1")
+prefix_router = APIRouter(prefix="/k4facd99def2ba")
 
 
 app = FastAPI(
     docs_url=None, # Disable docs (Swagger UI)
     redoc_url=None, # Disable redoc
 )
+
+app.mount("/templates/forder1", StaticFiles(directory="templates/forder1"), name="forder1")
+templates = Jinja2Templates(directory="templates/forder1")
+
+
+
 
 from multiprocessing import Process, Queue
 
@@ -112,6 +116,9 @@ async def read_item(request: Request):
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
+
+  
+app.include_router(prefix_router)
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=3000
 if __name__ == "__main__":

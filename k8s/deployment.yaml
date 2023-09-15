@@ -22,9 +22,9 @@ spec:
           #     value: Asia/Seoul
           #   - name: DATABASE_URL
           #     value: jdbc:mariadb://mariadb:3306/krampoline
-          resources:
-            requests:
-              memory: 1Gi
+          # resources:
+          #   requests:
+          #     memory: 1Gi
           # readinessProbe:
           #   httpGet:
           #     path: /api/test
