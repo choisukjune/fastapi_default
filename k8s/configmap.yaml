@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: backend
 data:
-  BASE_PATH: /k4facd99def2ba
+  basepath: /k4facd99def2ba

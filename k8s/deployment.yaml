@@ -22,7 +22,7 @@ spec:
           valueFrom:
             configMapKeyRef:
                name: backend
-               key: BASE_PATH
+               key: basepath
           # env:
           #   - name: TZ
           #     value: Asia/Seoul
