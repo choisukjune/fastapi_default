@@ -13,7 +13,7 @@ import pandas_datareader as pdr
 import pandas as pd
 from json import loads, dumps
 
-prefix_router = APIRouter(prefix="/k4facd99def2ba")
+prefix_router = APIRouter(prefix="/k4facd99def2ba/")
 
 app = FastAPI(
     docs_url=None, # Disable docs (Swagger UI)
