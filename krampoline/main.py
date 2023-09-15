@@ -84,25 +84,8 @@ import json
 #async def root():
 async def read_item(request: Request):
     r = dict( request )
-    # print(r)
-    # for a in r:
-    #     print( "------------------------------------------" )
-    #     print( r )
-    #     print( r[ a ] )
-    # test_process()
-    #a = pdr.get_data_fred('GS10')
-    a = pdr.DataReader('105840', 'naver', start="20230301", end="20230401")
-    b = a.to_dict()
-    print( b )
-    
-    #result = a.to_json(orient="split")
-    #parsed = loads(result)
-    #b = dumps(parsed, indent=4)  
-    #print(b)
-    #json_str = json.dumps(a, indent=4, default=str)
-    #return Response(content=json_str, media_type='application/json')  
     df = pd.DataFrame(a)
-    return templates.TemplateResponse("index.html", {"request": r, "time": df.to_html(classes='ui compact table celled')})
+    return templates.TemplateResponse("index.html", {"request": r, "time": "home"})
     #return {"message": "Hello World", "time" : checkTime()}
 
 #https://psystat.tistory.com/151
