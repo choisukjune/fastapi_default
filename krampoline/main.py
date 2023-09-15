@@ -12,8 +12,12 @@ from fastapi.templating import Jinja2Templates
 import pandas_datareader as pdr
 import pandas as pd
 from json import loads, dumps
+from starlette.config import Config
 
-prefix_router = APIRouter(prefix="/k4facd99def2ba")
+config = Config('.env')
+BASE_PATH = config('BASE_PATH')
+
+prefix_router = APIRouter(prefix=BASE_PATH)
 
 app = FastAPI(
     docs_url=None, # Disable docs (Swagger UI)
