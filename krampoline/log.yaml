@@ -18,6 +18,13 @@ handlers:
     formatter: access
     class: logging.StreamHandler
     stream: ext://sys.stdout
+  uvicorn:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    when: D
+    backupCount: 0
+    filename: ./logs/uvicorn.log
 loggers:
   uvicorn.error:
     level: INFO
