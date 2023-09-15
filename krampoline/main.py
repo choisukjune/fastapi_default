@@ -104,5 +104,5 @@ app.include_router(prefix_router)
 
 #uvicorn main:app --reload --host=0.0.0.0 --port=3000
 if __name__ == "__main__":
-    uvicorn.run('main:app', host="0.0.0.0", port=3000, reload=True, access_log=True, log_config="log.yaml", reload_excludes="api.log" )
+    uvicorn.run('main:app', host="0.0.0.0", port=3000, reload=True, access_log=True, log_config="log.ini", reload_excludes="api.log" )
     #uvicorn.run('main:app', host="0.0.0.0", port=3000, reload=True, access_log=True )
