@@ -18,7 +18,7 @@ spec:
           # 이미지를 넣어주세요.
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_6c1fb5913404
         env:
-        - name: BASE_PATH
+        - name: basepath
           valueFrom:
             configMapKeyRef:
                name: backend
