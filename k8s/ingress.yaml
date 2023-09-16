@@ -12,9 +12,15 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: /k73a8b72c2dc7a
+            backend:
               serviceName: backend
               servicePort: 3000
             # path: /k63ebdb037a8fa(/|$)(.*)
-            path: /k73a8b72c2dc7a
+            pathType: Prefix
+            
+          - path: /k73a8b72c2dc7a/aaa
+            backend:
+              serviceName: vue-vite
+              servicePort: 3000
             pathType: Prefix
