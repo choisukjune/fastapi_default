@@ -21,7 +21,7 @@ spec:
             
           - path: /k6d6d1b8e4034a/frontend
             backend:
-              serviceName: fontend
+              serviceName: frontend
               servicePort: 3000
             # path: /k63ebdb037a8fa(/|$)(.*)
             pathType: Prefix
