@@ -13,6 +13,9 @@ import pandas_datareader as pdr
 import pandas as pd
 from json import loads, dumps
 from starlette.config import Config
+from fastapi import Response
+import json
+
 
 config = Config('.env')
 BASE_PATH = config('BASE_PATH')
@@ -80,9 +83,6 @@ async def startup_event() :
     #https://hbase.tistory.com/341 subprocess 정보
     with subprocess.Popen(["ls", "-al"], stdout=subprocess.PIPE) as proc:
         print(proc.stdout.read().decode("utf-8"))   
-
-from fastapi import Response
-import json
 
       
 #https://wendys.tistory.com/174
