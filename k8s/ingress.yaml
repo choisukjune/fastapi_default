@@ -12,14 +12,14 @@ spec:
   rules:
     - http:
         paths:
-          - path: /k6d6d1b8e4034a/backend
+          - path: /k06a207bc8b7fa/backend
             backend:
               serviceName: backend
               servicePort: 3000
             # path: /k63ebdb037a8fa(/|$)(.*)
             pathType: Prefix
             
-          - path: /k6d6d1b8e4034a/frontend
+          - path: /k06a207bc8b7fa/frontend
             backend:
               serviceName: frontend
               servicePort: 3000
