@@ -16,7 +16,7 @@ spec:
       containers:
         - name: backend
           # 이미지를 넣어주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_648803ac9283
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_3f7232541e77
           env:
           - name: BASE_PATH
             valueFrom:
